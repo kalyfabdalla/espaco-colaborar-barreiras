@@ -15,6 +15,18 @@ const BookingForm: React.FC = () => {
   const [description, setDescription] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isMobile, setIsMobile] = useState(true); // Default to true to avoid flash, or false and check immediately
+
+  React.useEffect(() => {
+    const checkMobile = () => {
+      const userAgent = typeof window.navigator === "undefined" ? "" : navigator.userAgent;
+      const mobile = Boolean(userAgent.match(
+        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+      ));
+      setIsMobile(mobile);
+    };
+    checkMobile();
+  }, []);
 
   const handleAddTimeSlot = () => {
     setTimeSlots([...timeSlots, { id: Date.now(), start: '', end: '' }]);
@@ -50,7 +62,7 @@ const BookingForm: React.FC = () => {
     const body = encodeURIComponent(bodyContent);
     
     // Open mailto link
-    window.location.href = `mailto:kalyfabdalla@ifba.edu.br?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:kalyfabdalla@gmail.com?subject=${subject}&body=${body}`;
 
     // Simulate API call and reset form
     setTimeout(() => {
@@ -63,6 +75,24 @@ const BookingForm: React.FC = () => {
       setDescription('');
     }, 1000);
   };
+
+  if (!isMobile) {
+    return (
+      <section id="booking-form">
+        <Card>
+          <div className="text-center py-8">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-brand-primary mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
+            <h2 className="text-2xl font-bold text-slate-800 dark:text-white mb-2">Acesse pelo Celular</h2>
+            <p className="text-slate-600 dark:text-slate-300 max-w-md mx-auto">
+              Para realizar uma reserva e utilizar todas as funcionalidades, por favor acesse este site através do seu smartphone.
+            </p>
+          </div>
+        </Card>
+      </section>
+    );
+  }
 
   if (isSubmitted) {
     return (
@@ -98,7 +128,7 @@ const BookingForm: React.FC = () => {
           </div>
           <div>
             <label htmlFor="whatsapp" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">WhatsApp de Contato</label>
-            <input type="tel" id="whatsapp" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} placeholder="(XX) XXXXX-XXXX" required className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md focus:ring-brand-primary focus:border-brand-primary" />
+            <input type="tel" id="whatsapp" autoComplete="tel" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} placeholder="(XX) XXXXX-XXXX" required className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md focus:ring-brand-primary focus:border-brand-primary" />
           </div>
 
           <div className="space-y-4">
