@@ -1,0 +1,5 @@
+{
+  "name": "Espaço Colaborar",
+  "description": "Uma página para apresentar o Espaço Colaborar, mostrar a agenda e permitir que os usuários solicitem o uso do espaço através de um formulário de reserva.",
+  "requestFramePermissions": []
+}
