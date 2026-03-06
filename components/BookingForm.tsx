@@ -76,25 +76,7 @@ const BookingForm: React.FC = () => {
     }, 1000);
   };
 
-  if (!isMobile) {
-    return (
-      <section id="booking-form">
-        <Card>
-          <div className="text-center py-8">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-brand-primary mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-            </svg>
-            <h2 className="text-2xl font-bold text-slate-800 dark:text-white mb-2">Acesse pelo Celular</h2>
-            <p className="text-slate-600 dark:text-slate-300 max-w-md mx-auto">
-              Para realizar uma reserva e utilizar todas as funcionalidades, por favor acesse este site através do seu smartphone.
-            </p>
-          </div>
-        </Card>
-      </section>
-    );
-  }
-
-  if (isSubmitted) {
+    if (isSubmitted) {
     return (
       <Card>
         <div className="text-center">
@@ -116,71 +98,92 @@ const BookingForm: React.FC = () => {
     );
   }
 
-  return (
-    <section id="booking-form">
-      <Card>
-        <h2 className="text-2xl font-bold text-brand-primary mb-2">Desejo usar o Espaço Colaborar</h2>
-        <p className="text-slate-500 dark:text-slate-400 mb-6">Preencha o formulário abaixo para solicitar sua reserva.</p>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Nome Completo</label>
-            <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md focus:ring-brand-primary focus:border-brand-primary" />
+  if (!isMobile) {
+    return (
+      <section id="booking-form">
+        <Card>
+          <div className="text-center py-8">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-brand-primary mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
+            <h2 className="text-2xl font-bold text-slate-800 dark:text-white mb-2">Acesse pelo Celular</h2>
+            <p className="text-slate-600 dark:text-slate-300 max-w-md mx-auto">
+              Para realizar uma reserva e utilizar todas as funcionalidades, por favor acesse este site através do seu smartphone.
+            </p>
           </div>
-          <div>
-            <label htmlFor="whatsapp" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">WhatsApp de Contato</label>
-            <input type="tel" id="whatsapp" autoComplete="tel" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} placeholder="(XX) XXXXX-XXXX" required className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md focus:ring-brand-primary focus:border-brand-primary" />
-          </div>
+        </Card>
+      </section>
+    );
+  }
+  else {
+    return (
+      <section id="booking-form">
+        <Card>
+          <h2 className="text-2xl font-bold text-brand-primary mb-2">Desejo usar o Espaço Colaborar</h2>
+          <p className="text-slate-500 dark:text-slate-400 mb-6">Preencha o formulário abaixo para solicitar sua reserva.</p>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Nome Completo</label>
+              <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md focus:ring-brand-primary focus:border-brand-primary" />
+            </div>
+            <div>
+              <label htmlFor="whatsapp" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">WhatsApp de Contato</label>
+              <input type="tel" id="whatsapp" autoComplete="tel" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} placeholder="(XX) XXXXX-XXXX" required className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md focus:ring-brand-primary focus:border-brand-primary" />
+            </div>
 
-          <div className="space-y-4">
-            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Datas e Horários</label>
-            {timeSlots.map((slot, index) => (
-              <div key={slot.id} className="p-4 border border-slate-200 dark:border-slate-700 rounded-lg space-y-3 relative">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label htmlFor={`start-${slot.id}`} className="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">Início</label>
-                        <input type="datetime-local" id={`start-${slot.id}`} value={slot.start} onChange={(e) => handleTimeSlotChange(slot.id, 'start', e.target.value)} required className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md text-sm" />
-                    </div>
-                    <div>
-                        <label htmlFor={`end-${slot.id}`} className="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">Final</label>
-                        <input type="datetime-local" id={`end-${slot.id}`} value={slot.end} onChange={(e) => handleTimeSlotChange(slot.id, 'end', e.target.value)} required className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md text-sm" />
-                    </div>
+            <div className="space-y-4">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Datas e Horários</label>
+              {timeSlots.map((slot, index) => (
+                <div key={slot.id} className="p-4 border border-slate-200 dark:border-slate-700 rounded-lg space-y-3 relative">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                          <label htmlFor={`start-${slot.id}`} className="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">Início</label>
+                          <input type="datetime-local" id={`start-${slot.id}`} value={slot.start} onChange={(e) => handleTimeSlotChange(slot.id, 'start', e.target.value)} required className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md text-sm" />
+                      </div>
+                      <div>
+                          <label htmlFor={`end-${slot.id}`} className="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">Final</label>
+                          <input type="datetime-local" id={`end-${slot.id}`} value={slot.end} onChange={(e) => handleTimeSlotChange(slot.id, 'end', e.target.value)} required className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md text-sm" />
+                      </div>
+                  </div>
+                  {timeSlots.length > 1 && (
+                    <button type="button" onClick={() => handleRemoveTimeSlot(slot.id)} className="absolute -top-2 -right-2 bg-red-100 dark:bg-red-900 text-red-500 dark:text-red-300 rounded-full p-1 hover:bg-red-200 dark:hover:bg-red-800 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </button>
+                  )}
                 </div>
-                 {timeSlots.length > 1 && (
-                  <button type="button" onClick={() => handleRemoveTimeSlot(slot.id)} className="absolute -top-2 -right-2 bg-red-100 dark:bg-red-900 text-red-500 dark:text-red-300 rounded-full p-1 hover:bg-red-200 dark:hover:bg-red-800 transition-colors">
-                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </svg>
-                  </button>
-                )}
-              </div>
-            ))}
-            <button type="button" onClick={handleAddTimeSlot} className="w-full text-sm font-semibold text-brand-primary hover:text-brand-secondary dark:hover:text-brand-light transition-colors py-2 flex items-center justify-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clipRule="evenodd" />
-                </svg>
-                Adicionar outra data
-            </button>
-          </div>
+              ))}
+              <button type="button" onClick={handleAddTimeSlot} className="w-full text-sm font-semibold text-brand-primary hover:text-brand-secondary dark:hover:text-brand-light transition-colors py-2 flex items-center justify-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clipRule="evenodd" />
+                  </svg>
+                  Adicionar outra data
+              </button>
+            </div>
 
-          <div>
-            <label htmlFor="description" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Descrição do que será feito</label>
-            <textarea id="description" value={description} onChange={(e) => setDescription(e.target.value)} rows={4} required className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md focus:ring-brand-primary focus:border-brand-primary"></textarea>
-          </div>
-          <button type="submit" disabled={isSubmitting} className="w-full bg-brand-primary hover:bg-brand-primary/90 disabled:bg-slate-400 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center">
-            {isSubmitting ? (
-              <>
-                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Enviando...
-              </>
-            ) : "Enviar Solicitação"}
-          </button>
-        </form>
-      </Card>
-    </section>
-  );
+            <div>
+              <label htmlFor="description" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Descrição do que será feito</label>
+              <textarea id="description" value={description} onChange={(e) => setDescription(e.target.value)} rows={4} required className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md focus:ring-brand-primary focus:border-brand-primary"></textarea>
+            </div>
+            <button type="submit" disabled={isSubmitting} className="w-full bg-brand-primary hover:bg-brand-primary/90 disabled:bg-slate-400 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center">
+              {isSubmitting ? (
+                <>
+                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Enviando...
+                </>
+              ) : "Enviar Solicitação"}
+            </button>
+          </form>
+        </Card>
+      </section>
+    );
+  }
+
+  
 };
 
 export default BookingForm;
