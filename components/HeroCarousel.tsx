@@ -6,19 +6,19 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const images = [
   {
-    src: 'https://raw.githubusercontent.com/kalyfabdalla/espaco-colaborar-barreiras/refs/heads/main/public/images/IMG_0970.HEIC',
+    src: '/espaco-colaborar-barreiras/images/IMG_0970.HEIC',
     alt: 'Ambiente de trabalho moderno',
     title: 'Espaço colaborativo',
     description: 'Um ambiente perfeito para suas ideias fluírem.'
   },
   {
-    src: 'https://raw.githubusercontent.com/kalyfabdalla/espaco-colaborar-barreiras/refs/heads/main/public/images/IMG_0969.HEIC',
+    src: '/espaco-colaborar-barreiras/images/IMG_0969.HEIC',
     alt: 'Sala de reuniões',
     title: 'Espaço para reuniões',
     description: 'Equipadas para apresentações e brainstorms.'
   },
   {
-    src: 'https://raw.githubusercontent.com/kalyfabdalla/espaco-colaborar-barreiras/refs/heads/main/public/images/IMG_0967.HEIC',
+    src: '/espaco-colaborar-barreiras/images/IMG_0967.HEIC',
     alt: 'Ambiente para capacitações',
     title: 'Ambiente para capacitações',
     description: 'Ideal para treinamentos, oficinas e encontros que geram desenvolvimento.'
