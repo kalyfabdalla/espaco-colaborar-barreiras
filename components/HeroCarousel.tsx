@@ -2,21 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
+
+
 const images = [
   {
-    src: 'https://picsum.photos/seed/workspace/1920/1080',
+    src: '/images/IMG_0970.HEIC',
     alt: 'Ambiente de trabalho moderno',
     title: 'Espaço colaborativo',
     description: 'Um ambiente perfeito para suas ideias fluírem.'
   },
   {
-    src: 'https://picsum.photos/seed/meeting/1920/1080',
+    src: '/images/IMG_0969.HEIC',
     alt: 'Sala de reuniões',
     title: 'Espaço para reuniões',
     description: 'Equipadas para apresentações e brainstorms.'
   },
   {
-    src: 'https://picsum.photos/seed/coffee/1920/1080',
+    src: '/images/IMG_0967.HEIC',
     alt: 'Ambiente para capacitações',
     title: 'Ambiente para capacitações',
     description: 'Ideal para treinamentos, oficinas e encontros que geram desenvolvimento.'
